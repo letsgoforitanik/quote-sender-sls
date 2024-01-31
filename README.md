@@ -12,6 +12,6 @@ random quote via email to its subscribers.
 Quotes are stored in an `AWS S3` bucket. Frontend of the app is built in `Next JS`. Frontend fetches all the quotes
 via api. All the api functionalities are implemented as `AWS Lambda`s that sit behind an AWS API gateway. A quote
 is then randomly selected and displayed. Subscriber information is collected and passed to an API which store all
-the subscriber information in a `AWS DynamoDB`table. When someone subscribes, a notification mail is sent to the
+the subscriber information in an `AWS DynamoDB`table. When someone subscribes, a notification mail is sent to the
 admin via`AWS SNS`. Every 15 minutes, an `AWS EventBridge`rule triggers a certain lambda, which fetches all the
 subscriber emails and sends them a random quote via`Twilio SendGrid` platform.
