@@ -15,3 +15,7 @@ is then randomly selected and displayed. Subscriber information is collected and
 the subscriber information in an `AWS DynamoDB`table. When someone subscribes, a notification mail is sent to the
 admin via`AWS SNS`. Every 15 minutes, an `AWS EventBridge`rule triggers a certain lambda, which fetches all the
 subscriber emails and sends them a random quote via`Twilio SendGrid` platform.
+
+### Architecture Diagram
+
+![alt text](https://github.com/letsgoforitanik/quote-sender-sls/blob/master/arch-diagram.png)
