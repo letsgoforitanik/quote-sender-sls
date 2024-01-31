@@ -1,0 +1,45 @@
+service: email-subscription
+
+provider:
+    name: aws
+    region: ap-south-1
+    runtime: nodejs20.x
+    iam:
+        role:
+            statements:
+                - Effect: Allow
+                  Action:
+                      - s3:*
+                      - dynamodb:*
+                      - sns:*
+                  Resource: "*"
+    httpApi:
+        cors: true
+    layers:
+        - arn:aws:lambda:ap-south-1:297436977708:layer:email-subscription-node-modules:1
+
+package:
+    exclude:
+        - node_modules/**
+        - frontend/**
+        - src/**
+
+functions:
+    get-quotes:
+        handler: dist/lambda.getQuotes
+        events:
+            - httpApi:
+                  method: GET
+                  path: /quotes
+
+    subscribe-user:
+        handler: dist/lambda.subscribeUser
+        events:
+            - httpApi:
+                  method: POST
+                  path: /users/subscribe
+
+    send-email:
+        handler: dist/lambda.sendEmail
+        events:
+            - schedule: rate(15 minutes)
